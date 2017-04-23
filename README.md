@@ -12,4 +12,4 @@ $ npm start
 
 Then navigate to [localhost](http://localhost:3000/) is your favorite browser.
 
-This project is [live]()
+This project is [live](http://mendel-ttt.herokuapp.com/)
