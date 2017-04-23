@@ -50,10 +50,10 @@ class GameComponent extends React.Component {
           	onClick={(i) => this.handleClick(i)}/>
         </div>
         <div className="game-info">
-        	<button onClick={() => this.newGame()}>New Game</button>
-        	<button onClick={() => this.setAi()}>{this.state.ai ? 'Play a Human' : 'Play the Computer'}</button>
-          <div>{ this.state.ai ? 'Playing Computer' : 'Playing Human'}</div>
-          <div>{ status }</div>
+        	<button className="button" onClick={() => this.newGame()}>New Game</button>
+        	<button className="button" onClick={() => this.setAi()}>{this.state.ai ? 'Play a Human' : 'Play the Computer'}</button>
+          <div className="info">{ this.state.ai ? 'Playing Computer' : 'Playing Human'}</div>
+          <div className="info">{ status }</div>
         </div>
       </div>
     );
