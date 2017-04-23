@@ -63,6 +63,7 @@ class Game {
 	}
 
 	computerMove() {
+			if (this.currentPlayer().token !== "O") return;
 			let move = null;
 			let i;
 			for (i = 0; i < WIN_COMBINATIONS.length && move === null; i++) {
