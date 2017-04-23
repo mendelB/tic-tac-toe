@@ -11,6 +11,7 @@ class Game extends React.Component {
       }],
       stepNumber: 0,
       xIsNext: true,
+      ai: false
 		}
 	}
 	jumpTo(step) {
@@ -35,6 +36,9 @@ class Game extends React.Component {
 	    stepNumber: history.length,
 	    xIsNext: !this.state.xIsNext,
 	  });
+	}
+	setAi() {
+		this.setState({ai: !this.state.ai})
 	}
   render() {
   	const history = this.state.history;
@@ -67,6 +71,8 @@ class Game extends React.Component {
           	onClick={(i) => this.handleClick(i)}/>
         </div>
         <div className="game-info">
+        	<button onClick={() => this.setAi()}>{this.state.ai ? 'Play a Human' : 'Play the Computer'}</button>
+          <div>{ this.state.ai ? 'Playing Computer' : 'Playing Human'}</div>
           <div>{ status }</div>
           <ol>{ moves }</ol>
         </div>
