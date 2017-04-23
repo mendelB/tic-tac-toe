@@ -18,7 +18,6 @@ class Game {
 		this.board = new Board();
 		this.playerOne = new Player("X");
 		this.playerTwo = new Player("O");
-		this.choice;
 	}
 
 	currentPlayer() {
@@ -29,7 +28,7 @@ class Game {
 		const cells = this.board.cells;
 		let winner;
 		WIN_COMBINATIONS.forEach((comb) => {
-			if (cells[comb[0]] && cells[comb[1]] == cells[comb[2]] && cells[comb[0]] == cells[comb[1]]) {
+			if (cells[comb[0]] && cells[comb[1]] === cells[comb[2]] && cells[comb[0]] === cells[comb[1]]) {
 				winner = comb;
 			}	
 		})
@@ -64,26 +63,24 @@ class Game {
 	}
 
 	computerMove() {
-			let move;
-      if ( !this.board.isTaken(4)) {
-      	move = 4
-      } else if (this.board.turnCount() == 1) {
-        move = 0
-      } else if (this.board.turnCount() == 2) {
-        move = [0, 2, 6, 8].find( (pos) => !this.board.isTaken(pos) )
-      } else if (this.board.turnCount() == 3 && (this.board.cells[0] == this.board.cells[8] || this.board.cells[2] == this.board.cells[6]) ) {
-        move = 1
-      } else {
-				WIN_COMBINATIONS.find((comb) => {
-          if (comb.filter((pos) => this.board.cells[pos] == "O").size == 2 && comb.find((pos) => !this.board.isTaken(pos)) ) {
-            move = comb.find( (pos) => !this.board.isTaken(pos) )
-            return true
-          } else if (comb.filter( (pos) => this.board.isTaken(pos) && this.board.cells[pos] != "O" ).length == 2 && comb.find((pos) => !this.board.isTaken(pos))) {
-            move = comb.find( (pos) => !this.board.isTaken(pos) )
-            return true
-          }
-				})
-        if (!move) move = [1, 3, 7, 9, 2, 4, 6, 8].find( pos => !this.board.isTaken(pos) )
+			let move = null;
+			let i;
+			for (i = 0; i < WIN_COMBINATIONS.length && move === null; i++) {
+				let comb = WIN_COMBINATIONS[i]
+				debugger
+				if (comb.filter((pos) => this.board.cells[pos] === "O").length === 2 && comb.filter((pos) => !this.board.isTaken(pos)).length > 0 ) {
+					move = comb.find( (pos) => !this.board.isTaken(pos) )
+				}
+			}
+			for (i = 0; i < WIN_COMBINATIONS.length && move === null; i++) {
+				let comb = WIN_COMBINATIONS[i]
+				if (comb.filter( (pos) => this.board.isTaken(pos) && this.board.cells[pos] !== "O" ).length === 2 && comb.find((pos) => !this.board.isTaken(pos))) {
+          move = comb.find( (pos) => !this.board.isTaken(pos) )
+        }
+			}
+      if (move === null) {
+      	debugger
+      	move = [1, 3, 7, 9, 2, 4, 6, 8].find( pos => !this.board.isTaken(pos) )
       }
 			this.playTurn(move)
 	}

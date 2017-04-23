@@ -14,7 +14,7 @@ class GameComponent extends React.Component {
 	handleClick(i) {
 		if (this.state.game.isOver()) return
 		this.state.game.playTurn(i)
-		if (this.state.ai) {
+		if (this.state.ai && !this.state.game.isOver()) {
 			this.state.game.computerMove()
 		}
 		this.setState(this.state);
